@@ -51,7 +51,7 @@ const run = async (mailAddress) => {
       console.log({
         partition,
         offset: message.offset,
-        value: message.mailAddress.toString(),
+        value: message.value.toString(),
       })
     },
   })
@@ -87,7 +87,7 @@ app.post('/', (req, res) => {
   }
   console.log('options:', options);
   run(mailAddress).catch(console.error);
-  return getInterestRate(res, currency);
+  return getInterestRate(res);
 
   // request(options, function (err, response, body) {
   //   console.log('mail service err:', err);

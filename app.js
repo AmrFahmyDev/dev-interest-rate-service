@@ -126,7 +126,7 @@ async function getCurrentRate(res) {
   console.log('>>>>>>getCurrentRate');
 
   const interestRateCollection = dbConnection.getinterestRateCollection();
-  let result = await interestRateCollection.find();
+  let result = await interestRateCollection.findOne({});
 
   console.log('result:', result);
   console.log('result.Rate:', result.Rate);

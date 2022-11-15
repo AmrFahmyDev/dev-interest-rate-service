@@ -22,40 +22,40 @@ dbConnection.connect(); //.then(startApp)
 
 
 
-const kafka = new Kafka({
-  brokers: ['bank-services-cluster-kafka-bootstrap.bank-services.svc:9092'],
-  retry: {
-    initialRetryTime: 100,
-    retries: 8
-  }
-});
-const producer = kafka.producer()
-const consumer = kafka.consumer({ groupId: 'group1' })
+// const kafka = new Kafka({
+//   brokers: ['bank-services-cluster-kafka-bootstrap.bank-services.svc:9092'],
+//   retry: {
+//     initialRetryTime: 100,
+//     retries: 8
+//   }
+// });
+// const producer = kafka.producer()
+// const consumer = kafka.consumer({ groupId: 'group1' })
 
-const run = async (mailAddress) => {
-  // Producing
-  await producer.connect()
-  await producer.send({
-    topic: 'send-email',
-    messages: [
-      { value: mailAddress },
-    ],
-  });
+// const run = async (mailAddress) => {
+//   // Producing
+//   await producer.connect()
+//   await producer.send({
+//     topic: 'send-email',
+//     messages: [
+//       { value: mailAddress },
+//     ],
+//   });
 
-  // Consuming
-  await consumer.connect()
-  await consumer.subscribe({ topic: 'send-email', fromBeginning: true })
+//   // Consuming
+//   await consumer.connect()
+//   await consumer.subscribe({ topic: 'send-email', fromBeginning: true })
 
-  await consumer.run({
-    eachMessage: async ({ topic, partition, message }) => {
-      console.log({
-        partition,
-        offset: message.offset,
-        value: message.value.toString(),
-      })
-    },
-  })
-}
+//   await consumer.run({
+//     eachMessage: async ({ topic, partition, message }) => {
+//       console.log({
+//         partition,
+//         offset: message.offset,
+//         value: message.value.toString(),
+//       })
+//     },
+//   })
+// }
 
 app.get('/', (req, res) => {
   console.log('GET Request');
@@ -86,7 +86,7 @@ app.post('/', (req, res) => {
     body: 'mailAddress=' + mailAddress
   }
   console.log('options:', options);
-  run(mailAddress).catch(console.error);
+  //run(mailAddress).catch(console.error);
   return getInterestRate(res);
 
   // request(options, function (err, response, body) {

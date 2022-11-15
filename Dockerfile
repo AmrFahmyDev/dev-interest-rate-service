@@ -21,5 +21,5 @@ RUN groupadd -r rate -f -g 1001 \
 
 USER rate
 
-EXPOSE 8080
+EXPOSE 3000
 CMD ["npm", "start"]
